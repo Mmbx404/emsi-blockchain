@@ -29,11 +29,7 @@ blockchain_t *blockchain_create(void) {
         genesisBlockData.len = 16;
         genesisBlock.info = genesisBlockInfo;
         genesisBlock.data = genesisBlockData;
-        if (llist_add_node(linkedList,(llist_node_t) genesisBlock, ADD_NODE_FRONT))
-        {
-             free(initialBlockChain), free(genesisBlock), llist_destroy(linkedList, 1, NULL);
-             return (NULL);
-        }
+        llist_add_node(linkedList, genesisBLock, ADD_NODE_FRONT);
         initialBlockChain->chain = linkedList;
         return (initialBlockChain);
 }
