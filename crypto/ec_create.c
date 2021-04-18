@@ -1,7 +1,7 @@
 #include "hblk_crypto.h"
 
 /**
- * a function that creates a new EC key pair.
+ * ec_create -  a function that creates a new EC key pair.
  * EC_KEY structure, containing both the public and private keys
  * Return: EC_KEY * a pointer to EC_KEY, or null on failure
 */
