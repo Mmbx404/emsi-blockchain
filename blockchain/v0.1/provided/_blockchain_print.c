@@ -42,8 +42,8 @@ static int _block_print(block_t const *block, unsigned int index,
 	printf("%s\tinfo: {\n", indent);
 	printf("%s\t\tindex: %u,\n", indent, block->info.index);
 	printf("%s\t\tdifficulty: %u,\n", indent, block->info.difficulty);
-	printf("%s\t\ttimestamp: %lu,\n", indent,(long unsigned int) block->info.timestamp);
-	printf("%s\t\tnonce: %lu,\n", indent,(long unsigned int) block->info.nonce);
+	printf("%s\t\ttimestamp: %lu,\n", indent, block->info.timestamp);
+	printf("%s\t\tnonce: %lu,\n", indent, block->info.nonce);
 	printf("%s\t\tprev_hash: ", indent);
 	_print_hex_buffer(block->info.prev_hash, SHA256_DIGEST_LENGTH);
 	printf("\n%s\t},\n", indent);
@@ -85,8 +85,8 @@ static int _block_print_brief(block_t const *block, unsigned int index,
 	printf("%s\tinfo: { ", indent);
 	printf("%u, ", block->info.index);
 	printf("%u, ", block->info.difficulty);
-	printf("%lu, ",(long unsigned int) block->info.timestamp);
-	printf("%lu, ",(long unsigned int) block->info.nonce);
+	printf("%lu, ", block->info.timestamp);
+	printf("%lu, ", block->info.nonce);
 	_print_hex_buffer(block->info.prev_hash, SHA256_DIGEST_LENGTH);
 	printf(" },\n");
 
