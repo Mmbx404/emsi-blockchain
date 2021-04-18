@@ -1,13 +1,13 @@
 #include "hblk_crypto.h"
 
 /**
- * it sign a given set of bytes using a given EC_KEY private key
-  * msglen: message length
- * sig: holds the address at which to store the signature
- * key: points to the EC_KEY structure containing the private key
- * msg: points to the msglen characters to be signed
- * Return a pointer to the signature buffer, or NULL upon failure
- */
+ * ec_sign - a function that signs a given set of bytes
+ * @key: points to the EC_KEY
+ * @msg:  points to the msg
+ * @msglen: is the length of msg
+ * @sig: holds the address at which to store the signature
+ * Return: uint8_t* a pointer to digest or null on failure
+*/
 uint8_t *ec_sign(EC_KEY const *key, uint8_t const *msg, size_t msglen,
 		 sig_t *sig)
 {
