@@ -21,7 +21,9 @@
 
 #define HBLK_MAGIC "HBLK"
 #define HBLK_VERSION "0.1"
-
+#define HBLK_MAGIC_LEN 4
+#define HBLK_VERSION_LEN 3
+#define LOOP_START 0
 /**
  * struct blockchain_s - Blockchain structure
  *
@@ -89,6 +91,23 @@ typedef struct block_s
 	block_data_t	data; /* This must stay second */
 	uint8_t	 hash[SHA256_DIGEST_LENGTH];
 } block_t;
+
+/**
+ * struct header_s - Header structure
+ *
+ * @hblk_magic: hblk_magic
+ * @hblk_version: the version of hblk
+ * @hblk_endian: endian
+ * @hblk_blocks: blocks
+ */
+typedef struct header_s
+{
+	uint8_t	hblk_magic[HBLK_MAGIC_LEN];
+	uint8_t	hblk_version[HBLK_VERSION_LEN];
+	uint8_t	hblk_endian;
+	int32_t	hblk_blocks;
+
+} header_t;
 
 /* GENESIS BLOCK - first block in the chain */
 #define GENESIS_BLOCK { \
