@@ -16,7 +16,7 @@
 #include <unistd.h>
 
 #include <openssl/sha.h>
-
+#define B_DATA_MAX 1024
 #define MIN(x, y) ((x) < (y) ? (x) : (y))
 
 #define HBLK_MAGIC "HBLK"
