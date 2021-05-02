@@ -138,5 +138,7 @@ int blockchain_serialize(blockchain_t const *blockchain, char const *path);
 blockchain_t *blockchain_deserialize(char const *path);
 llist_t *deserialize_blocks(int fd, uint32_t size, uint8_t endianness);
 int block_is_valid(block_t const *block, block_t const *prev_block);
+int hash_matches_difficulty(uint8_t const hash[SHA256_DIGEST_LENGTH],
+uint32_t difficulty);
 
 #endif
