@@ -98,4 +98,3 @@ blockchain_t *blockchain_deserialize(char const *path)
 	fclose(fp);
 	return (bc);
 }
-

@@ -9,4 +9,3 @@ void block_destroy(block_t *block)
 {
 	free(block);
 }
-
