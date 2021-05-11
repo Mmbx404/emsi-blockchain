@@ -7,10 +7,9 @@ SRCS := $(wildcard *.c)
 OBJS := $(SRCS:.c=.o)
 
 %.o : %.c
-	@echo "Creating object.." 
+	@echo "Creating object.."
 	${CC} $(FLAGS) -c $< -o $@
 
 libhblk_crypto.a : $(OBJS)
 	@echo "Creating libhblk_crypto.a archive.."
 	ar r $@ $^
-

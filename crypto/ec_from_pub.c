@@ -1,39 +1,39 @@
 #include "hblk_crypto.h"
 
 /**
- * ec_from_pub - a function that creates an EC_KEY
- * @pub: is the public key
- * Return: EC_KEY* a pointer to EC_KEY or null on failure
-*/
+ * ec_from_pub - generates EC_KEY from pub key
+ * @pub: the pub key in thebuffer
+ *
+ * Return: The generated EC_KEY struct
+ */
 EC_KEY *ec_from_pub(uint8_t const pub[EC_PUB_LEN])
 {
-EC_KEY *ec_key;
-EC_POINT *ec_point;
-EC_GROUP *group;
+	EC_KEY *key;
+	EC_POINT *point;
+	int isConverted = 0;
+	int isPublicKeySet = 0;
 
-if (!pub)
-return (NULL);
+	if (!pub)
+		return (NULL);
 
-ec_key = EC_KEY_new_by_curve_name(EC_CURVE);
+	key = EC_KEY_new_by_curve_name(EC_CURVE);
+	if (!key)
+		return (NULL);
 
-if (!ec_key)
-return (NULL);
+	point = EC_POINT_new(EC_KEY_get0_group(key));
+	if (!point)
+		return (NULL);
 
-group = EC_GROUP_new_by_curve_name(EC_CURVE);
+	isConverted = EC_POINT_oct2point(EC_KEY_get0_group(key), point, pub
+		, EC_PUB_LEN, NULL);
+	isPublicKeySet = EC_KEY_set_public_key(key, point);
 
-if (!group)
-return (NULL);
-
-ec_point = EC_POINT_new(group);
-
-if (!ec_point)
-return (NULL);
-
-if (!EC_POINT_oct2point(group, ec_point, pub, EC_PUB_LEN, NULL))
-return (NULL);
-
-if (!EC_KEY_set_public_key(ec_key, ec_point))
-return (NULL);
-return (ec_key);
+	if (!isConverted || !isPublicKeySet)
+	{
+		EC_KEY_free(key);
+		EC_POINT_free(point);
+		return (NULL);
+	}
+	EC_POINT_free(point);
+	return (key);
 }
-

@@ -1,46 +1,44 @@
+
 #include "hblk_crypto.h"
 
 /**
- * ec_save - a function that saves an existing EC key pair
- * @key: is the sequence of bytes to be hashed
- * @folder:  is the number of bytes to hash in
- * Return: int a number 1 or 0 on failure
-*/
+ * ec_save - save the key pair into a file
+ * @key: key pair
+ * @folder: folder path
+ *
+ * Return: 1 | 0
+ */
 int ec_save(EC_KEY *key, char const *folder)
 {
-char FL[512] = {0};
-FILE *F;
-struct stat st = {0};
+	FILE *fptr = NULL;
+	char file[FILE_LENGTH];
+	struct stat stbuf;
 
-if (!key || !folder)
-return (0);
+	if (!key || !folder)
+		return (0);
+	if (stat(folder, &stbuf) == -1)
+	{
+		if (mkdir(folder, FILE_PERMISSION) == -1)
+			return (0);
+	}
 
-if (stat(folder, &st) == -1)
-{
-if (mkdir(folder, 0700) == -1)
-return (0);
+	sprintf(file, "%s/%s", folder, "key.pem");
+	fptr = fopen(file, "w");
+
+	if (!fptr)
+		return (0);
+	if (!PEM_write_ECPrivateKey(fptr, key, NULL, NULL, 0, NULL, NULL))
+		return (0);
+	fclose(fptr);
+
+	sprintf(file, "%s/%s", folder, "key_pub.pem");
+	fptr = fopen(file, "w");
+
+	if (!fptr)
+		return (0);
+	if (!PEM_write_EC_PUBKEY(fptr, key))
+		return (0);
+
+	fclose(fptr);
+	return (1);
 }
-
-sprintf(FL, "%s/%s", folder, "key.pem");
-F = fopen(FL, "w");
-
-if (!F)
-return (0);
-
-if (!PEM_write_ECPrivateKey(F, key, NULL, NULL, 0, NULL, NULL))
-return (0);
-
-fclose(F);
-sprintf(FL, "%s/%s", folder, "key_pub.pem");
-F = fopen(FL, "w");
-
-if (!F)
-return (0);
-
-if (!PEM_write_EC_PUBKEY(F, key))
-return (0);
-
-fclose(F);
-return (1);
-}
-
