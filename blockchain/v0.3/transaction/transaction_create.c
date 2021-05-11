@@ -5,7 +5,6 @@
  * @node: current node
  * @idx: index of node
  * @arg: visitor_t struct
- *
  * Return: 0 if continue else 1
  */
 int collect_sender_unspent(llist_node_t node, unsigned int idx, void *arg)
@@ -30,7 +29,6 @@ int collect_sender_unspent(llist_node_t node, unsigned int idx, void *arg)
  * @node: current node
  * @idx: index of node
  * @arg: inputs list
- *
  * Return: 0 if continue else 1
  */
 int map_output_to_input(llist_node_t node, unsigned int idx, void *arg)
@@ -55,7 +53,6 @@ int map_output_to_input(llist_node_t node, unsigned int idx, void *arg)
  * @sender_pub: buffer of sender's public key
  * @receiver_pub: buffer of receiver's public key
  * @tx: transaction struct to populate
- *
  * Return: tx struct
  */
 transaction_t *populate_tx(EC_KEY const *sender, visitor_t *visitor,
@@ -101,7 +98,6 @@ transaction_t *populate_tx(EC_KEY const *sender, visitor_t *visitor,
  * @receiver: public key of tx receiver
  * @amount: tx amount
  * @all_unspent: llist of unspent outputs to date
- *
  * Return: pointer to new transaction struct or NULL
  */
 transaction_t *transaction_create(EC_KEY const *sender, EC_KEY const *receiver,

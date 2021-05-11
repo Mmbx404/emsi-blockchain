@@ -4,7 +4,6 @@
  * is_empty - checks if buffer memory is all 0
  * @buf: the buffer to check
  * @size: size of buffer
- *
  * Return: 1 if empty else 0
  */
 int is_empty(uint8_t *buf, size_t size)
@@ -16,7 +15,6 @@ int is_empty(uint8_t *buf, size_t size)
  * coinbase_is_valid - validates coinbase tx
  * @coinbase: the tx to validate
  * @block_index: index of block containing tx
- *
  * Return: 1 if valid else 0
  */
 int coinbase_is_valid(transaction_t const *coinbase, uint32_t block_index)

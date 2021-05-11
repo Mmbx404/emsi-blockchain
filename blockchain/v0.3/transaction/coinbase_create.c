@@ -4,7 +4,6 @@
  * coinbase_create - create coinbase transaction
  * @receiver: coin receiver
  * @block_index: block index to which tx belongs
- *
  * Return: pointer to tx struct
  */
 transaction_t *coinbase_create(EC_KEY const *receiver, uint32_t block_index)
